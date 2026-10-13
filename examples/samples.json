@@ -1,0 +1,127 @@
+[
+  {
+    "type": "book",
+    "data": {
+      "authors": ["王名扬"],
+      "title": "美国行政法",
+      "publisher": "北京大学出版社",
+      "year": 2007,
+      "pages": 18
+    }
+  },
+  {
+    "type": "book",
+    "data": {
+      "authors": ["富勒"],
+      "nationality": "美",
+      "title": "法律的道德性",
+      "translator": "郑戈",
+      "publisher": "商务印书馆",
+      "year": 2005
+    }
+  },
+  {
+    "type": "journal",
+    "data": {
+      "authors": ["季卫东"],
+      "title": "法律程序的意义——对中国法制建设的另一种思考",
+      "journal": "中国社会科学",
+      "year": 1993,
+      "issue": 1,
+      "pages": 91
+    }
+  },
+  {
+    "type": "collection",
+    "data": {
+      "authors": ["王保树"],
+      "title": "股份有限公司机关构造中的董事和董事会",
+      "editor": "梁慧星",
+      "editor_role": "主编",
+      "container_title": "民商法论丛",
+      "volume": 1,
+      "publisher": "法律出版社",
+      "year": 1994,
+      "pages": 110
+    }
+  },
+  {
+    "type": "newspaper",
+    "data": {
+      "authors": ["何海波"],
+      "title": "判决书上网",
+      "newspaper": "法制日报",
+      "year": 2000,
+      "month": 5,
+      "day": 21,
+      "page": 2
+    }
+  },
+  {
+    "type": "online",
+    "data": {
+      "authors": ["汪波"],
+      "title": "哈尔滨市政法机关正对“宝马案”认真调查复查",
+      "site": "人民网",
+      "year": 2004,
+      "month": 1,
+      "day": 10,
+      "url": "http://www.people.com.cn/GB/shehui/1062/2289764.html"
+    }
+  },
+  {
+    "type": "wechat",
+    "data": {
+      "authors": ["刘松山"],
+      "title": "失信惩戒立法的三大问题",
+      "account": "中国法律评论",
+      "year": 2019,
+      "month": 11,
+      "day": 19
+    }
+  },
+  {
+    "type": "legal",
+    "data": { "name": "民法典", "article": { "article": 1224, "paragraph": 1, "item": 2 } }
+  },
+  {
+    "type": "case",
+    "data": {
+      "court": "北京市海淀区人民法院",
+      "case_number": { "year": 1998, "code": "海行初字", "number": 142 },
+      "document_type": "行政判决书"
+    }
+  },
+  {
+    "type": "thesis",
+    "data": {
+      "authors": ["刘俊超"],
+      "title": "论个人信息处理的正当性基础",
+      "school": "南京大学法学院",
+      "year": 2026,
+      "degree": "硕士",
+      "pages": 33
+    }
+  },
+  {
+    "type": "foreign_book",
+    "data": {
+      "authors": ["H. L. A. Hart"],
+      "title": "The Concept of Law",
+      "publisher": "Oxford University Press",
+      "year": 1961,
+      "pages": 123
+    }
+  },
+  {
+    "type": "foreign_article",
+    "data": {
+      "authors": ["Cass R. Sunstein"],
+      "title": "Interpreting Statutes in the Regulatory State",
+      "volume": 103,
+      "journal": "Harvard Law Review",
+      "first_page": 405,
+      "year": 1989
+    }
+  }
+]

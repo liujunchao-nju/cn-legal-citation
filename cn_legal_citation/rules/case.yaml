@@ -1,0 +1,33 @@
+type: case
+label: 裁判文书
+description: 判决书、裁定书等司法裁判文书
+source: 《法学引注手册》(第二版)第 89 条：格式统一为“审判法院名称+案号+文书类型”，不再采用“法院+文书类型, 案号”的旧式表述
+examples:
+  - 北京市海淀区人民法院(1998)海行初字第142号行政判决书。
+  - 田永诉北京科技大学案,北京市海淀区人民法院(1998)海行初字第142号行政判决书。
+fields:
+  case_name:
+    type: plain
+  court:
+    type: plain
+  case_number:
+    type: case_number
+  document_type:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+segments:
+  - text: "{case_name}{comma}"
+    requires: [case_name]
+  - text: "{court}{case_number}{document_type}"
+    requires: [court, case_number]
+  - text: "{comma}{date}"
+    requires: [date]
+  - text: "。"

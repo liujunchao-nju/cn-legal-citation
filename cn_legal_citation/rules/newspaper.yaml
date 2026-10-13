@@ -1,0 +1,39 @@
+type: newspaper
+label: 报纸文章
+description: 刊登于报纸的报道、评论
+source: 《法学引注手册》(第二版)示例〔8〕
+examples:
+  - 何海波:《判决书上网》,载《法制日报》2000年5月21日,第2版。
+  - 李立:《基层依法行政为何缺乏动力》,载《法制日报》2008年1月14日,第8版。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  authorship:
+    type: authorship
+  title:
+    type: plain
+  newspaper:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  page:
+    type: plain
+segments:
+  - text: "{authors}{authorship}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}载《{newspaper}》{date}"
+    requires: [newspaper]
+  - text: "{comma}第{page}版"
+    requires: [page]
+  - text: "。"

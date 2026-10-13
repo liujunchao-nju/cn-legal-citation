@@ -1,0 +1,48 @@
+type: collection
+label: 论文集析出文献
+description: 收录于论文集、丛书中的单篇文献
+source: 《法学引注手册》(第二版)示例〔6〕〔7〕；《法律科学》编辑部 2021 年执行公告第 11 条
+examples:
+  - 王保树:《股份有限公司机关构造中的董事和董事会》,载梁慧星主编:《民商法论丛》第1卷,法律出版社1994年版,第110页。
+  - "[德]莱纳·沃尔夫:《风险法的风险》,陈霄译,载刘刚编译:《风险规制:德国的理论与实践》,法律出版社2012年版。"
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  authorship:
+    type: authorship
+  title:
+    type: plain
+  translator:
+    type: translator
+  editor:
+    type: plain
+  editor_role:
+    type: authorship
+  container_title:
+    type: plain
+  volume:
+    type: plain
+  publisher:
+    type: publisher_year
+  year:
+    type: plain
+  pages:
+    type: page_range
+segments:
+  - text: "{authors}{authorship}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}{translator}"
+    requires: [translator]
+  - text: "{comma}载{editor}{editor_role}{colon}《{container_title}》"
+    requires: [editor, container_title]
+  - text: "第{volume}卷"
+    requires: [volume]
+  - text: "{comma}{publisher}"
+    requires: [publisher]
+  - text: "{comma}{pages}"
+    requires: [pages]
+  - text: "。"

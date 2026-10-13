@@ -1,0 +1,40 @@
+type: book
+label: 中文著作
+description: 专著、教材、译著、主编作品等纸质图书
+source: 《法学引注手册》(第二版)示例〔1〕〔2〕〔3〕〔4〕；《法律科学》编辑部 2021 年执行公告第 4-6 条
+examples:
+  - 王名扬:《美国行政法》,北京大学出版社2007年版,第18页。
+  - 张新宝:《侵权责任法》(第4版),中国人民大学出版社2016年版,第73-75页。
+  - 高鸿钧、程汉大主编:《英美法原论》,北京大学出版社2013年版,第110页。
+  - "[美]富勒:《法律的道德性》,郑戈译,商务印书馆2005年版。"
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  authorship:
+    type: authorship
+  title:
+    type: plain
+  edition:
+    type: edition
+  translator:
+    type: translator
+  publisher:
+    type: publisher_year
+  pages:
+    type: page_range
+segments:
+  - text: "{authors}{authorship}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{edition}"
+    requires: [edition]
+  - text: "{comma}{translator}"
+    requires: [translator]
+  - text: "{comma}{publisher}"
+    requires: [publisher]
+  - text: "{comma}{pages}"
+    requires: [pages]
+  - text: "。"

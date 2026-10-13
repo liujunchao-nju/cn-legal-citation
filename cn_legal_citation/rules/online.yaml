@@ -1,0 +1,37 @@
+type: online
+label: 网络文献
+description: 网站上发布的文章、报道。网站名称不使用书名号
+source: 《法学引注手册》(第二版)示例〔9〕〔10〕；《法律科学》编辑部 2021 年执行公告第 8 条
+examples:
+  - 汪波:《哈尔滨市政法机关正对“宝马案”认真调查复查》,载人民网2004年1月10日,http://www.people.com.cn/GB/shehui/1062/2289764.html。
+  - 《被告人李宁、张磊贪污案一案开庭》,载新华网,http://www.xinhuanet.com/legal/2019-12/31/c_1125406056.htm。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  title:
+    type: plain
+  site:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  url:
+    type: plain
+segments:
+  - text: "{authors}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}载{site}{date}"
+    requires: [site]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "。"
