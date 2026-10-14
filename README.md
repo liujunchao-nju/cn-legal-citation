@@ -1,5 +1,8 @@
 # cn-legal-citation
 
+[![tests](https://github.com/liujunchao-nju/cn-legal-citation/actions/workflows/tests.yml/badge.svg)](https://github.com/liujunchao-nju/cn-legal-citation/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 按《法学引注手册》（第二版）生成中文法学脚注。规则与代码分离，式样写在 YAML 里，改格式不需要动 Python。
 
 ## 为什么做这个
@@ -130,6 +133,8 @@ segments:
 pip install -e ".[dev]"
 pytest
 ```
+
+每次 push 与 PR 会由 [GitHub Actions](https://github.com/liujunchao-nju/cn-legal-citation/actions/workflows/tests.yml) 在 Python 3.9 / 3.11 / 3.13 上自动复跑这批用例，并执行 CLI 冒烟测试。
 
 这批用例的作用是防止后续调整规则时把已确认的式样改坏。如果你发现某条式样与目标刊物要求不符，改 YAML 里的 `segments` 即可，测试会明确告诉你改坏了哪一条。
 
