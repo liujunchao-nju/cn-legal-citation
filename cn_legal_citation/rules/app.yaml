@@ -3,7 +3,7 @@ label: App 文章
 description: App 上发布的文章，标明 App 名称和上传日期
 source: 《法学引注手册》(第二版)第 56 条第 4 项
 examples:
-  - 莫纪宏:《论"中国式现代化"的法治保障》,载"学习强国"App2024年6月21日。
+  - 莫纪宏:《论“中国式现代化”的法治保障》,载“学习强国”App2024年6月21日。
 fields:
   authors:
     type: author_list

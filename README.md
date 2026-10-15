@@ -4,7 +4,20 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://pypi.org/project/cn-legal-citation/)
 
-按《法学引注手册》（第二版，北京大学出版社 2025 年版）生成中文法学脚注。规则与代码分离，式样写在 YAML 里，改格式不需要动 Python。
+按《法学引注手册》（第二版，北京大学出版社 2025 年版）生成、核查、改写中文法学脚注。规则与代码分离，式样写在 YAML 里，改格式不需要动 Python。
+
+## 两种用法
+
+**如果你不写代码**，用技能形态：说一句「帮我把这篇论文的脚注按引注手册核一遍」，就能拿到核查报告或规范后的文件。技能自带引擎，**不需要装 Python 包**。
+
+```bash
+# 下载 dist/cn-legal-citation-skill-v0.3.0.zip，解压到技能目录即可
+python scripts/selfcheck.py     # 先自检，确认技能完好
+```
+
+**如果你写代码**，用 Python 包：`pip install -e .` 之后调 API 或命令行。
+
+两条路走的是**同一个规则引擎**，输出完全一致。技能只是把引擎包了一层，让不会命令行的人也能用。
 
 ## 为什么做这个
 
@@ -14,10 +27,11 @@
 
 ## 与市面工具的区别
 
-- **确定性输出。** 同样输入永远得到同样结果，193 项测试覆盖，可回归、可 CI。不依赖大模型现场生成，不会出现"这次对下次错"。
+- **确定性输出。** 同样输入永远得到同样结果，221 项测试覆盖，可回归、可 CI。不依赖大模型现场生成，不会出现"这次对下次错"。
+- **能核查已有文档。** 不只是生成新脚注：可以读一篇写好的论文，逐条判断每个脚注是否合规，输出问题清单，再另存一份改好的副本。这一点是纯提示词方案做不到的。
 - **规则即数据。** 式样在 YAML 里，程序可读、可校验、可扩展；不是给 AI 看的一段提示词。
 - **覆盖完整。** 69 种文献类型，覆盖《法学引注手册》第二版全部 150 条，含英法德意俄日六种外文和港澳台、国际组织文件。
-- **零重依赖。** 只依赖 PyYAML，`pip install` 一行装好。
+- **零重依赖。** 只依赖 PyYAML（技能形态连这个都不需要，改用内置 JSON 规则）。
 
 ## 安装
 
@@ -65,6 +79,55 @@ python -m cn_legal_citation cite --type book --data '{\"authors\":[\"王名扬\"
 ```
 王名扬:《美国行政法》,中国法制出版社1995年版,第18页。
 ```
+
+### 核查与改写已有文档
+
+这是 0.3.0 新增的能力：不只能生成新脚注，还能读一篇写好的文稿，逐条判断
+脚注是否合规。
+
+```bash
+# 提取脚注（先确认文档里是真脚注）
+python -m cn_legal_citation doc-extract --file 论文.docx
+
+# 整篇核查，输出报告
+python -m cn_legal_citation doc-check --file 论文.docx --out 核查报告.md
+
+# 批量改写：另存副本，原件不动，附变更对照表
+python -m cn_legal_citation doc-rewrite --file 论文.docx --out 论文_已规范.docx --table 变更对照.md
+```
+
+核查把每条脚注分成四类：
+
+| 状态 | 含义 |
+|---|---|
+| 完全合规 | 引擎能逐字复现 |
+| 标点需规范化 | 字段都对，只是用了全角标点（手册示例用半角） |
+| 格式不符 | 字段对但式样不对，报告给出差异点 |
+| 未能解析 | 超出规则解析范围，如实报出，不硬猜 |
+
+原理很朴素：**能否用引擎的字段把这条脚注逐字重新渲染出来，就是它合不合规的
+标准**。渲染结果与原文字有出入，差异就是问题所在。所以核查不需要额外的判断
+逻辑，它和生成能力是同一件事的两面。
+
+改写有两条硬约束：只输出副本（原件字节不变，有测试守着），只改「标点需规范化」
+与「格式不符」两类（未解析的一律不动，不经确认不替用户猜）。
+
+支持 `.docx`（Word 真实页下脚注，读 `word/footnotes.xml`）与 `.md`
+（`[^1]: 文本` 形式）。
+
+### 逆向解析
+
+```bash
+# 脚注文本 → 字段
+python -m cn_legal_citation parse --text "王名扬:《美国行政法》,中国法制出版社1995年版,第18页。"
+
+# 核查一组脚注（每行一条）
+python -m cn_legal_citation check --file footnotes.txt
+```
+
+解析采用「规则匹配优先，认不出就如实返回未解析」的策略，覆盖中文常见类型
+（图书、期刊、报纸、文集、判例、法条、网络文献、公众号等）与英文著作论文。
+法、德、意、俄、日文献体例复杂，本版不做规则解析，交由使用者补字段。
 
 ### Python API
 
@@ -206,11 +269,39 @@ segments:
 
 字段值的加工（作者超过三人省略为"甲等"、页码转"第73-75页"、法条转"第1224条第1款第2项"、期刊卷期转"第47卷第4期（2018年）"）由 `normalize.py` 里的规范化器完成，在 YAML 的 `fields` 中声明，同样是可配置的。
 
+## 技能形态
+
+`skill/` 目录是技能形态的源码。构建脚本会把手写的 `SKILL.md`、脚本、参考文档
+与引擎源码、导出的 JSON 规则组装成一个可离线运行的技能包：
+
+```bash
+python tools/build_skill.py
+# 组装到 ~/.workbuddy/skills/cn-legal-citation，并打包到 dist/*.zip
+```
+
+三种使用场景（`SKILL.md` 里有给智能体的完整操作细则）：
+
+| 场景 | 用户说什么 | 走什么 |
+|---|---|---|
+| L1 单条生成 | 「这段引了张新宝侵权责任法第5版，帮我加个注」 | `cite` |
+| L2 整篇核查 | 「帮我核一下这篇论文的脚注规不规范」 | `doc-check` |
+| L3 批量改写 | 「把脚注都改成规范格式，另存一份给我」 | `doc-rewrite` |
+
+技能对智能体有一条硬性纪律：**脚注文本一律由引擎产出，智能体不得自己拼格式**。
+这是技能与「把规则写成一段提示词」的本质区别 —— 前者可复现、可核查，后者不能。
+
+技能自带引擎（`vendor/`），零第三方依赖：缺 PyYAML 时自动读内置的
+`rules.json`。附 `scripts/selfcheck.py`，被复制到新环境后先跑一次即可确认
+技能完好。
+
+`references/types.md` 与 `references/fields.md` 由 `tools/gen_skill_refs.py`
+从规则文件生成，规则改动后重跑一次即可保持同步。
+
 ## 规则依据与验证
 
 式样以《法学引注手册》（第二版，北京大学出版社 2025 年版）为准，条文共 150 条。每个规则文件的 `source` 字段都写明了依据条款。
 
-测试包含 193 个用例，其中 32 条直接取自手册第二版「示例」部分的公开示例，作为回归基准：
+测试包含 221 个用例，其中 32 条直接取自手册第二版「示例」部分的公开示例，作为回归基准：
 
 ```bash
 pip install -e ".[dev]"
@@ -240,6 +331,9 @@ pytest
 2. **脚注编号**不在本工具职责内。编号方式（全文连续还是每页重新起算）由各刊物自定，本工具只生成脚注文本本身。
 3. **音频与视频的具体栏目写法**：手册第 57、58 条只给出文字性要求，未附完整示例，本项目的式样按条款文字推导，如与手册原文有出入欢迎指正。
 4. **裁判文书案号**支持字典与字符串两种输入，但不校验案号本身的真实性。引用前请自行核对。
+5. **逆向解析只覆盖中文常见类型与英文著作论文。** 法、德、意、俄、日文献的体例过于复杂，本版不做规则解析；核查到这类脚注时会如实报「未能解析」，不会给出错误字段。需要处理时请手工补字段后用 `cite` 生成。
+6. **文档通道只支持 .docx 与 .md。** 不支持旧版 `.doc`、`.tex`、`.pdf`。Word 文档里的脚注必须是**真实页下脚注**（Word 脚注对象）；若是用上标数字手打的，读不到。
+7. **改写不覆盖原件。** 这是有意为之的设计约束，不是限制：`--out` 必须与输入不同，引擎会拒绝同路径写入。
 
 ## 免责声明
 
@@ -247,7 +341,11 @@ pytest
 
 ## English
 
-`cn-legal-citation` renders Chinese legal footnotes according to the *Handbook of Legal Citation* (《法学引注手册》, 2nd edition, Peking University Press, 2025). Citation styles live in YAML rule files rather than in Python code, so a formatter change is a one-line edit, not a refactor. The package covers all 150 clauses of the handbook across 69 document types, including English, French, German, Italian, Russian and Japanese sources, and 32 test cases are taken verbatim from the handbook's published examples and serve as regression anchors.
+`cn-legal-citation` renders, checks, and reformats Chinese legal footnotes according to the *Handbook of Legal Citation* (《法学引注手册》, 2nd edition, Peking University Press, 2025). Citation styles live in YAML rule files rather than in Python code, so a formatter change is a one-line edit, not a refactor. The package covers all 150 clauses across 69 document types, including English, French, German, Italian, Russian and Japanese sources; 32 test cases are taken verbatim from the handbook's published examples as regression anchors.
+
+Beyond generation, it can **audit an existing paper**: extract the footnotes from a `.docx` or `.md`, re-render each one from parsed fields, and report every place where the rendering differs from the original. The audit needs no separate rule set — being reproducible by the engine *is* the conformance criterion. Rewriting always writes to a new file; the original is byte-for-byte untouched (enforced by tests).
+
+A companion agent **skill** (`skill/`, built by `tools/build_skill.py`) wraps the engine with zero third-party dependencies, so users who don't write code can just describe what they want.
 
 ## 许可
 

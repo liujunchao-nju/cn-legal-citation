@@ -33,3 +33,10 @@ jobs:
           python -m cn_legal_citation types
           python -m cn_legal_citation cite --type book --file examples/book.json
           python -m cn_legal_citation batch --file examples/samples.json
+          python -m cn_legal_citation parse --text "王名扬:《美国行政法》,中国法制出版社1995年版,第18页。"
+          python -m cn_legal_citation check --text "张新宝:《侵权责任法》,中国人民大学出版社2020年版。"
+
+      - name: Build the skill and run its self-check
+        run: |
+          python tools/build_skill.py --target "$RUNNER_TEMP/skill"
+          python "$RUNNER_TEMP/skill/scripts/selfcheck.py"

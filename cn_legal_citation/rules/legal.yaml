@@ -8,7 +8,8 @@ examples:
   - 《刑法》第17条之一。
   - 《公司法》(2005年修订)第16条。
   - 公安部《公安机关办理行政案件程序规定》(2006年修订)第9条。
-  - 《最高人民法院关于适用〈中华人民共和国刑事诉讼法〉的解释》(法释〔2021〕1号)第100条。
+  - 《行政诉讼法》(1989年)第54条第2项第3目。
+  - 《最高人民法院关于适用〈中华人民共和国刑事诉讼法〉的解释》(法释〔2021〕1号),第100条。
   - 《全国人民代表大会常务委员会关于严禁卖淫嫖娼的决定》,1991年9月4日第七届全国人大常委会第二十一次会议通过。
 fields:
   issuing_authority:
@@ -32,8 +33,11 @@ segments:
     requires: [revision]
   - text: "{document_number}"
     requires: [document_number]
+  - text: "{comma}{article}"
+    requires: [article, document_number]
   - text: "{article}"
     requires: [article]
+    absent: [document_number]
   - text: "{comma}{adoption_info}"
     requires: [adoption_info]
   - text: "。"
