@@ -1,0 +1,36 @@
+type: blog
+label: 博客文章
+description: 博客上发布的文章，标明作者、文章名、博客名称、上传日期和网页链接
+source: 《法学引注手册》(第二版)第 56 条第 1 项
+examples:
+  - 黄晓磊:《再说博客文章被正式引用》,载科学网博客2012年3月23日,http://blog.sciencenet.cn/blog-111883-550928.html。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  title:
+    type: plain
+  blog:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  url:
+    type: plain
+segments:
+  - text: "{authors}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}载{blog}{date}"
+    requires: [blog]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "。"

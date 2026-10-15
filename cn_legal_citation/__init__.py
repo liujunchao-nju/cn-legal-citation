@@ -5,6 +5,6 @@ from __future__ import annotations
 from .formatter import cite, cite_many, render
 from .rules import available_types, load_rules
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = ["cite", "cite_many", "render", "load_rules", "available_types", "__version__"]

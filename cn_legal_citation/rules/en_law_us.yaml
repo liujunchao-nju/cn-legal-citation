@@ -1,0 +1,31 @@
+type: en_law_us
+label: 美国法律
+description: 美国联邦立法。《法律大全》载法律编号与卷次页码，《美国法典》载法典卷次与条文
+source: 《法学引注手册》(第二版)第 109 条
+examples:
+  - Department of Transportation Act, Pub. L. No. 89-670, § 9, 80 Stat. 931, 944-947 (1966).
+  - Administrative Procedure Act, 5 U.S.C. § 555 (2006).
+  - Labor Management Relations (Taft-Hartley) Act, § 301(a), 29 U.S.C. § 185(a) (2012).
+fields:
+  name:
+    type: plain
+  pub_law:
+    type: plain
+  section:
+    type: plain
+  source:
+    type: plain
+  year:
+    type: plain
+segments:
+  - text: "{name}, "
+    requires: [name]
+  - text: "{pub_law}, "
+    requires: [pub_law]
+  - text: "{section}, "
+    requires: [section]
+  - text: "{source}"
+    requires: [source]
+  - text: " ({year})"
+    requires: [year]
+  - text: "."

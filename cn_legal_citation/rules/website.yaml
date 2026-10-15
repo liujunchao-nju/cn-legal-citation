@@ -1,0 +1,31 @@
+type: website
+label: 网站
+description: 网站、栏目本身作为文献来源（无作者、无文章名）
+source: 《法学引注手册》(第二版)第 54 条（网页没有上传日期或涉及动态页面时注明访问日期，格式为"×年×月×日访问"）；示例〔14〕
+examples:
+  - 法国最高行政法院网站,https://conseil-etat.fr/zh,2024年10月8日访问。
+  - 中国人大网"已结束的征求意见"栏目,http://www.npc.gov.cn/flcaw/more.html,2020年2月28日访问。
+fields:
+  name:
+    type: plain
+  column:
+    type: plain
+  url:
+    type: plain
+  visit_year:
+    type: plain
+  visit_month:
+    type: plain
+  visit_day:
+    type: plain
+  visit_date:
+    type: date_cn
+    from: [visit_year, visit_month, visit_day]
+segments:
+  - text: "{name}{column}"
+    requires: [name]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "{comma}{visit_date}访问"
+    requires: [visit_date]
+  - text: "。"

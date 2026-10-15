@@ -1,0 +1,52 @@
+type: en_book
+label: 英文著作
+description: 英文图书。文章名与书名实词首字母大写、斜体；书名后括注版次，译者在书名后
+source: 《法学引注手册》(第二版)第 102-104、107 条；示例〔26〕
+examples:
+  - 'William P. Alford, To Steal a Book Is an Elegant Offense: Intellectual Property Law in Chinese Civilization, Stanford University Press, 1995, p. 98.'
+  - A. V. Dicey, An Introduction to the Study of the Law of the Constitution (10th ed.), Palgrave Macmillan, 1985.
+  - Bryan A. Garner chief ed., Black's Law Dictionary (12th ed.), Thomson Reuters, 2024.
+  - 'Jiurgen Habermas, Between Facts and Norms: Contributions to a Discourse Theory of Law and Democracy, translated by William Rehg, MIT Press, 1996, p. 330-336.'
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " & "
+      sep_last: " & "
+  authorship:
+    type: authorship
+    options:
+      space: true
+  title:
+    type: plain
+  edition:
+    type: plain
+  translator:
+    type: plain
+  container:
+    type: plain
+  publisher:
+    type: plain
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}{authorship}, "
+    requires: [authors]
+  - text: "{title}"
+    requires: [title]
+  - text: " ({edition})"
+    requires: [edition]
+  - text: ", translated by {translator}"
+    requires: [translator]
+  - text: ", in {container}"
+    requires: [container]
+  - text: ", {publisher}, {year}"
+    requires: [publisher, year]
+  - text: ", {pages}"
+    requires: [pages]
+  - text: "."

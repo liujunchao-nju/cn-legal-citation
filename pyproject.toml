@@ -4,18 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cn-legal-citation"
-version = "0.1.0"
-description = "按《法学引注手册》(第二版)生成中文法学脚注"
+version = "0.2.0"
+description = "按《法学引注手册》(第二版)生成中文法学脚注，覆盖 150 条全部体例"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "刘俊超", email = "251820244@smail.nju.edu.cn" }]
-keywords = ["legal citation", "法学引注", "footnote", "中国法", "legal writing"]
+keywords = [
+    "legal citation",
+    "法学引注",
+    "法学引注手册",
+    "footnote",
+    "中国法",
+    "legal writing",
+    "citation formatter",
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Topic :: Text Processing :: Markup",
     "Intended Audience :: Legal Industry",
+    "Natural Language :: Chinese (Simplified)",
 ]
 dependencies = ["PyYAML>=6.0"]
 
@@ -23,8 +32,9 @@ dependencies = ["PyYAML>=6.0"]
 dev = ["pytest>=7.0"]
 
 [project.urls]
-Homepage = "https://github.com/liujunchao/cn-legal-citation"
-Issues = "https://github.com/liujunchao/cn-legal-citation/issues"
+Homepage = "https://github.com/liujunchao-nju/cn-legal-citation"
+Issues = "https://github.com/liujunchao-nju/cn-legal-citation/issues"
+Changelog = "https://github.com/liujunchao-nju/cn-legal-citation/releases"
 
 [project.scripts]
 cn-legal-citation = "cn_legal_citation.cli:main"

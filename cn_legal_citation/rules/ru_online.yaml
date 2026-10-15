@@ -1,0 +1,30 @@
+type: ru_online
+label: 俄文网络文献
+description: 俄文网络文献。文章名斜体，标注网站名称、上传日期并附网页链接
+source: 《法学引注手册》(第二版)第 141 条
+examples:
+  - Юлия Л. Яковлева, Пост крушения вертолета Ми-8 в Карелии возбуждено уголовное дело, ФОНТАНКА 2024-02-05, https://www.fontanka.ru/2024/02/05/73195217/.
+  - Во втором чтении принят законопроект о запрете "Наливай" в жилых домах, Государственная Дума 2024-01-31, http://duma.gov.ru/news/58734/.
+fields:
+  authors:
+    type: plain
+  title:
+    type: plain
+  site:
+    type: plain
+  date:
+    type: plain
+  url:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "{site} "
+    requires: [site]
+  - text: "{date}, "
+    requires: [date]
+  - text: "{url}"
+    requires: [url]
+  - text: "."

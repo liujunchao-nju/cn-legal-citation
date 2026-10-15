@@ -1,14 +1,21 @@
 type: legal
-label: 法律、法规、规章与规范性文件
-description: 法律条文、司法解释、行政法规、部门规章及其他规范性文件
-source: 《法学引注手册》(第二版)第 72-76 条；何海波《法学引注的三个原则》
+label: 法律法规规章
+description: 法律、法规、规章及其条文；含修订年份、文号、通过信息
+source: 《法学引注手册》(第二版)第 67-71 条（名称第 67 条、制定机关第 68 条、版本第 69 条、条款序数第 70 条）
 examples:
   - 《行政处罚法》第32条。
   - 《民法典》第1224条第1款第2项。
+  - 《刑法》第17条之一。
+  - 《公司法》(2005年修订)第16条。
+  - 公安部《公安机关办理行政案件程序规定》(2006年修订)第9条。
   - 《最高人民法院关于适用〈中华人民共和国刑事诉讼法〉的解释》(法释〔2021〕1号)第100条。
   - 《全国人民代表大会常务委员会关于严禁卖淫嫖娼的决定》,1991年9月4日第七届全国人大常委会第二十一次会议通过。
 fields:
+  issuing_authority:
+    type: plain
   name:
+    type: titled
+  revision:
     type: plain
   document_number:
     type: document_number
@@ -17,9 +24,13 @@ fields:
   adoption_info:
     type: plain
 segments:
-  - text: "《{name}》"
+  - text: "{issuing_authority}"
+    requires: [issuing_authority]
+  - text: "{name}"
     requires: [name]
-  - text: "({document_number})"
+  - text: "({revision})"
+    requires: [revision]
+  - text: "{document_number}"
     requires: [document_number]
   - text: "{article}"
     requires: [article]

@@ -1,0 +1,36 @@
+type: de_case
+label: 德国法院案例
+description: 德国法院案例。判例集名称、卷号、首页页码，括注所引内容页码
+source: 《法学引注手册》(第二版)第 126 条
+examples:
+  - BGH NStZ-RR 1999, 185.
+  - BGH NJW 2000, 1560 (1562).
+  - BVerfGE 75, 369 (380).
+  - BGH NJW 1996, 1467 = BGHZ 132, 119 ff.
+fields:
+  court:
+    type: plain
+  report:
+    type: plain
+  year:
+    type: plain
+  page:
+    type: plain
+  pincite:
+    type: plain
+  parallel:
+    type: plain
+segments:
+  - text: "{court} "
+    requires: [court]
+  - text: "{report} "
+    requires: [report]
+  - text: "{year}, "
+    requires: [year]
+  - text: "{page}"
+    requires: [page]
+  - text: " ({pincite})"
+    requires: [pincite]
+  - text: " = {parallel}"
+    requires: [parallel]
+  - text: "."

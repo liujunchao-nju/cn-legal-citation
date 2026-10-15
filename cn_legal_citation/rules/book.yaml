@@ -1,12 +1,18 @@
 type: book
 label: 中文著作
-description: 专著、教材、译著、主编作品等纸质图书
-source: 《法学引注手册》(第二版)示例〔1〕〔2〕〔3〕〔4〕；《法律科学》编辑部 2021 年执行公告第 4-6 条
+description: 专著、教材、译著、编著、古籍等纸质图书
+source: 《法学引注手册》(第二版)第 25-49 条（一般格式第 25 条；作者第 27-36 条；文献名称第 37-40 条；出版信息第 41 条；页码和章节第 48-49 条）
 examples:
-  - 王名扬:《美国行政法》,北京大学出版社2007年版,第18页。
-  - 张新宝:《侵权责任法》(第4版),中国人民大学出版社2016年版,第73-75页。
-  - 高鸿钧、程汉大主编:《英美法原论》,北京大学出版社2013年版,第110页。
+  - 王名扬:《美国行政法》,中国法制出版社1995年版,第18页。
+  - 张新宝:《侵权责任法》(第5版),中国人民大学出版社2020年版,第73-75页。
+  - 高鸿钧、程汉大主编:《英美法原论》,北京大学出版社2013年版,第二章"英美判例法"。
   - "[美]富勒:《法律的道德性》,郑戈译,商务印书馆2005年版。"
+  - 陈卫佐译注:《德国民法典》(第5版),法律出版社2020年版。
+  - (清)沈家本:《历代刑法考》,邓经元、宇骞点校,中华书局1985年版。
+  - (宋)王溥:《唐会要》,卷三十九《定格令》,上海古籍出版社2006年版,第825页。
+  - 《论语·述而》
+  - 魏振瀛主编:《民法》(第8版),北京大学出版社、高等教育出版社2021年版。
+  - "[德]哈特穆特·毛雷尔:《行政法学总论》,高家伟译,法律出版社2000年版,第55、64-68页。"
 fields:
   authors:
     type: author_list
@@ -20,21 +26,38 @@ fields:
     type: edition
   translator:
     type: translator
+  collator:
+    type: plain
+  volume_note:
+    type: plain
   publisher:
     type: publisher_year
   pages:
     type: page_range
+  page_note:
+    type: plain
+  container_title:
+    type: plain
+  tail_period:
+    type: tail_period
 segments:
   - text: "{authors}{authorship}{colon}"
     requires: [authors]
   - text: "《{title}》"
     requires: [title]
+  - text: "{comma}载《{container_title}》"
+    requires: [container_title]
   - text: "{edition}"
     requires: [edition]
   - text: "{comma}{translator}"
     requires: [translator]
+  - text: "{comma}{collator}"
+    requires: [collator]
+  - text: "{comma}{volume_note}"
+    requires: [volume_note]
   - text: "{comma}{publisher}"
     requires: [publisher]
-  - text: "{comma}{pages}"
+  - text: "{comma}{pages}{page_note}"
     requires: [pages]
-  - text: "。"
+  - text: "{tail_period}"
+    requires: [tail_period]

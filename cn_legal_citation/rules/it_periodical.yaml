@@ -1,0 +1,48 @@
+type: it_periodical
+label: 意大利文报刊
+description: 意大利文报纸与杂志文章。报纸标日期，杂志标年份、卷数及期数
+source: 《法学引注手册》(第二版)第 130 条
+examples:
+  - Aldo Cazzullo, Il ritorno e i motivi, in Corriere della sera, 7 novembre 2024, p. 8.
+  - Paolo Greco, Sull'ammissione al passivo con riserva di prova nel procedimento fallimentare, in Rivista del diritto commerciale, 1953, II, 4, p. 55.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " e "
+      sep_last: " e "
+  title:
+    type: plain
+  container:
+    type: plain
+  date:
+    type: plain
+  year:
+    type: plain
+  volume:
+    type: plain
+  issue:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "{container}, "
+    requires: [container]
+  - text: "{date}, "
+    requires: [date]
+  - text: "{year}, "
+    requires: [year]
+  - text: "{volume}, "
+    requires: [volume]
+  - text: "{issue}, "
+    requires: [issue]
+  - text: "{pages}"
+    requires: [pages]
+  - text: "."

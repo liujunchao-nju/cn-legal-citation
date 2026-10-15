@@ -1,0 +1,36 @@
+type: en_law_uk
+label: 英国法律
+description: 英国议会立法、枢密令、政府规章等。年份与法律名称之间不加逗号，条文用 s. 表示
+source: 《法学引注手册》(第二版)第 108 条
+examples:
+  - Human Rights Act 1998, s. 3(2)(b).
+  - Penalties for Disorderly Behaviour (Amendment of Minimum Age) Order 2004, SI 2004/3166.
+  - Law of Property Act 1925, s. 44(1), 37 Hals. Stat. (4th ed.) 139.
+  - Civil Procedure Rules 1998, s. 5.4C, https://www.legislation.gov.uk/uksi/1998/3132/contents.
+fields:
+  name:
+    type: plain
+  year:
+    type: plain
+  section:
+    type: plain
+  number:
+    type: plain
+  source:
+    type: plain
+  url:
+    type: plain
+segments:
+  - text: "{name}"
+    requires: [name]
+  - text: " {year}"
+    requires: [year]
+  - text: ", {section}"
+    requires: [section]
+  - text: ", {number}"
+    requires: [number]
+  - text: ", {source}"
+    requires: [source]
+  - text: ", {url}"
+    requires: [url]
+  - text: "."

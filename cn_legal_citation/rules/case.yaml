@@ -1,10 +1,17 @@
 type: case
-label: 裁判文书
-description: 判决书、裁定书等司法裁判文书
-source: 《法学引注手册》(第二版)第 89 条：格式统一为“审判法院名称+案号+文书类型”，不再采用“法院+文书类型, 案号”的旧式表述
+label: 司法案例
+description: 裁判文书、指导性案例、公报案例、人民法院案例库案例、媒体报道与案例选编
+source: 《法学引注手册》(第二版)第 87-91 条（一般规范第 87 条、案例名称第 88 条、案号第 89 条、案例来源第 90 条、裁判时间第 91 条）
 examples:
-  - 北京市海淀区人民法院(1998)海行初字第142号行政判决书。
+  - 苏嘉鸿诉中国证监会行政处罚案,北京市高级人民法院(2018)京行终445号行政判决书。
+  - 包郑照等诉苍南县人民政府强制拆除房屋案,浙江省高级人民法院(1988)浙法民上字7号民事判决书。
   - 田永诉北京科技大学案,北京市海淀区人民法院(1998)海行初字第142号行政判决书。
+  - 榆林市凯奇莱能源投资有限公司诉西安地质矿产勘查开发院合作勘查合同纠纷上诉案,最高人民法院(2011)民一终字第81号民事判决书,2017年12月16日。
+  - 荣宝英诉王阳、永诚财产保险股份有限公司江阴支公司机动车交通事故责任纠纷案,最高人民法院指导案例24号(2014年)。
+  - 陆红霞诉南通市发展和改革委员会政府信息公开答复案,载《最高人民法院公报》2015年第11期。
+  - 车某玲诉朱某芳相邻关系纠纷案,人民法院案例库2024-18-2-053-001。
+  - 谢文彬诉广东省司法厅案,参见李桂茹、孔献之:《七旬律师被判可以执业〈律师法赢了司法部文件〉》,载《中国青年报》2003年6月4日,第7版。
+  - 宁德市大众影院诉宁德地区工商行政管理局行政处罚案,载最高人民法院中国应用法学研究所编:《人民法院案例选(1992-1999年合订本)·行政卷》,中国法制出版社2000年版,案例51。
 fields:
   case_name:
     type: plain
@@ -20,14 +27,56 @@ fields:
     type: plain
   day:
     type: plain
-  date:
+  judgment_date:
     type: date_cn
     from: [year, month, day]
+  gazette_year:
+    type: plain
+  gazette_issue:
+    type: plain
+  guiding_organ:
+    type: plain
+  guiding_no:
+    type: plain
+  guiding_year:
+    type: plain
+  database_number:
+    type: plain
+  report_author:
+    type: plain
+  report_title:
+    type: plain
+  report_newspaper:
+    type: plain
+  report_date:
+    type: plain
+  report_page:
+    type: plain
+  compiler:
+    type: plain
+  compilation_title:
+    type: plain
+  compilation_publisher:
+    type: plain
+  compilation_year:
+    type: plain
+  case_no:
+    type: plain
 segments:
-  - text: "{case_name}{comma}"
+  - text: "{case_name}"
     requires: [case_name]
-  - text: "{court}{case_number}{document_type}"
+  - text: "{comma}{court}{case_number}{document_type}"
     requires: [court, case_number]
-  - text: "{comma}{date}"
-    requires: [date]
+  - text: "{comma}载《最高人民法院公报》{gazette_year}年第{gazette_issue}期"
+    requires: [gazette_year, gazette_issue]
+  - text: "{comma}{guiding_organ}指导案例{guiding_no}号({guiding_year}年)"
+    requires: [guiding_organ, guiding_no]
+  - text: "{comma}人民法院案例库{database_number}"
+    requires: [database_number]
+  - text: "{comma}参见{report_author}{colon}《{report_title}》,载《{report_newspaper}》{report_date},第{report_page}版"
+    requires: [report_author, report_title, report_newspaper, report_date]
+  - text: "{comma}载{compiler}编:《{compilation_title}》,{compilation_publisher}{compilation_year}年版,案例{case_no}"
+    requires: [compiler, compilation_title]
+  - text: "{comma}{judgment_date}"
+    requires: [judgment_date]
   - text: "。"

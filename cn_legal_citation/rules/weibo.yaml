@@ -1,0 +1,30 @@
+type: weibo
+label: 微博
+description: 微博上的文章，标明微博账号、上传日期和网页链接
+source: 《法学引注手册》(第二版)第 56 条第 2 项（账号、上传日期和网页链接之间用逗号隔开）
+examples:
+  - 新浪微博xiaolwl,2020年1月31日,https://weibo.com/1139098205/44667685335861595。
+fields:
+  platform:
+    type: plain
+  account:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  url:
+    type: plain
+segments:
+  - text: "{platform}{account}"
+    requires: [account]
+  - text: "{comma}{date}"
+    requires: [date]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "。"

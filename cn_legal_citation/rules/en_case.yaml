@@ -1,0 +1,33 @@
+type: en_case
+label: 英文案例（美国）
+description: 美国法院案例。基本格式为案例名称、案例报告卷次页码、（法院 年份）
+source: 《法学引注手册》(第二版)第 114 条；示例〔27〕
+examples:
+  - Chevron U.S.A., Inc. v. Natural Resources Defense Council, Inc., 467 U.S. 837 (1984).
+  - Natural Resources Defense Council v. Gorsuch, 685 F.2d 718 (D.C. Cir. 1982).
+  - Roe v. Wade, 410 U.S. 113, 93 S. Ct. 705, 35 L. Ed. 2d 147 (1973).
+  - United States v. Dino Nastasi et al., No. 3:15-cr-00213-FDW-DCK (W.D. North Carolina).
+fields:
+  case_name:
+    type: plain
+  reports:
+    type: report_list
+  docket:
+    type: plain
+  court:
+    type: plain
+  court_year:
+    type: court_year
+    from: [court]
+  year:
+    type: plain
+segments:
+  - text: "{case_name}"
+    requires: [case_name]
+  - text: ", {reports}"
+    requires: [reports]
+  - text: ", {docket}"
+    requires: [docket]
+  - text: " {court_year}"
+    requires: [court_year]
+  - text: "."

@@ -1,0 +1,37 @@
+type: fr_law
+label: 法国法律
+description: 法国法典条文与单行法规。法典条文写缩写与 art.，单行法规写类型、编号与日期
+source: 《法学引注手册》(第二版)第 119 条
+examples:
+  - C. civ., art. 1832-1.
+  - C. trav., art. R. 4152-20, al. 2.
+  - CGCT, art. L. 2121-25 et R. 2121-11.
+  - Loi n° 2013-403 du 17 mai 2013.
+  - Ord. n° 2016-307 du 17 mars 2016 portant codification des dispositions relatives à la réutilisation des informations publiques dans le code des relations entre le public et l'administration.
+  - Décret n° 2016-38 du 17 mars 2016.
+  - Art. 78 et s. de la Constitution du 24 juin 1793.
+fields:
+  code:
+    type: plain
+  article:
+    type: plain
+  law_type:
+    type: plain
+  number:
+    type: plain
+  date:
+    type: plain
+  subject:
+    type: plain
+  article_full:
+    type: plain
+segments:
+  - text: "{code}, art. {article}"
+    requires: [code, article]
+  - text: "{law_type} n° {number} du {date}"
+    requires: [law_type, number, date]
+  - text: " portant {subject}"
+    requires: [subject]
+  - text: "Art. {article_full}"
+    requires: [article_full]
+  - text: "."

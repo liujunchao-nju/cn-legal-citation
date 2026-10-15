@@ -1,0 +1,38 @@
+type: broadcast
+label: 广播电视节目
+description: 广播电台、电视台的节目，标明栏目名称与播出时间
+source: 《法学引注手册》(第二版)第 57 条（标明广播电台、电视台和广播电视栏目名称、播出时间；必要时标明主持人；可附链接）
+examples:
+  - 白岩松主持:《新型冠状病毒肺炎,情况如何?》,中央电视台"新闻1+1"栏2020年1月20日播出,http://tv.cctv.com/2020/01/20/VIDECRZF7PWXb80z86QyB0db200120.shtml。
+fields:
+  host:
+    type: plain
+  title:
+    type: plain
+  station:
+    type: plain
+  column:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  url:
+    type: plain
+segments:
+  - text: "{host}主持:"
+    requires: [host]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}{station}“{column}”栏"
+    requires: [station]
+  - text: "{date}播出"
+    requires: [date]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "。"

@@ -1,0 +1,32 @@
+type: white_paper
+label: 白皮书
+description: 官方机构就政策措施、法律制度或实施情况所作的说明
+source: 《法学引注手册》(第二版)第 80 条（标明发布机关、名称、发布日期及官网链接；正式出版的可提供出版信息）
+examples:
+  - 国务院新闻办公室:《新时代的中国网络法治建设》,2023年3月16日发布,https://www.gov.cn/zhengce/2023-03/16/content_5747005.htm。
+  - 最高人民法院:《中国法院的司法改革(2013-2022)》,2023年2月21日发布,人民法院出版社2023年版。
+fields:
+  authority:
+    type: plain
+  name:
+    type: plain
+  date:
+    type: plain
+  url:
+    type: plain
+  publisher:
+    type: plain
+  year:
+    type: plain
+segments:
+  - text: "{authority}{colon}"
+    requires: [authority]
+  - text: "《{name}》"
+    requires: [name]
+  - text: "{comma}{date}发布"
+    requires: [date]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "{comma}{publisher}{year}年版"
+    requires: [publisher, year]
+  - text: "。"

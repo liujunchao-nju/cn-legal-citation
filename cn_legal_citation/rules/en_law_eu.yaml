@@ -1,0 +1,30 @@
+type: en_law_eu
+label: 欧盟法律
+description: 欧盟条约、法规、指令等，标明名称、颁布年份和法规编号
+source: 《法学引注手册》(第二版)第 110 条
+examples:
+  - Consolidated Version of the Treaty on European Union [2008] OJ C115/13.
+  - General Data Protection Regulation, (EU) 2016/679, Art. 60.
+  - Directive of the European Parliament and of the Council Concerning Certain Aspects of the Organisation of Working Time, 2003/88/EC, https://eur-lex.europa.eu/eli/dir/2003/88/oj.
+fields:
+  name:
+    type: plain
+  number:
+    type: plain
+  eu_number:
+    type: eu_number
+    from: [number]
+  article:
+    type: plain
+  url:
+    type: plain
+segments:
+  - text: "{name}"
+    requires: [name]
+  - text: "{eu_number}"
+    requires: [number]
+  - text: ", {article}"
+    requires: [article]
+  - text: ", {url}"
+    requires: [url]
+  - text: "."

@@ -1,0 +1,35 @@
+type: en_online
+label: 英文网络文献
+description: 英文网络文献，标明网站名、上传日期和网页链接；无上传日期时在链接后注明访问日期
+source: 《法学引注手册》(第二版)第 100 条
+examples:
+  - Stephen McDonell, When China Began Streaming Trials Online, BBC News (30 September 2016), https://www.bbc.com/news/blogs-china-blog-37515399.
+  - Members and Observers of the WTO, https://www.wto.org/english/thewto_e/whatis_e/tife/org6_e.htm, visited on 8 October 2024.
+fields:
+  authors:
+    type: plain
+  title:
+    type: plain
+  site:
+    type: plain
+  site_date:
+    type: site_date
+    from: [site]
+  date:
+    type: plain
+  url:
+    type: plain
+  visit_date:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "{site_date}"
+    requires: [site]
+  - text: ", {url}"
+    requires: [url]
+  - text: ", visited on {visit_date}"
+    requires: [visit_date]
+  - text: "."

@@ -1,0 +1,25 @@
+type: en_case_intl
+label: 英文案例（国际法院与仲裁机构）
+description: 国际法院、WTO、ICSID、欧洲法院案例。report 字段按第 115 条各机构格式填写
+source: 《法学引注手册》(第二版)第 115 条
+examples:
+  - East Timor (Portugal v. Australia), Judgment, ICJ Reports 1995, para. 29-35.
+  - East Timor (Portugal v. Australia), ICJ Judgment of 30 June 1995, para. 29-35.
+  - United States-Measure Affecting Imports of Woven Wool Shirts and Blouses from India, WTO Appellate Body Report, WT/DS/33/AB/R, adopted on 23 May 1997, p. 4.
+  - Abaclat and Others v. Argentine Republic, ICSID Case No. ARB/07/5, Decision on Jurisdiction and Admissibility of 4 August 2011, para. 50.
+  - Parti écologiste "Les Verts" v. European Parliament, ECJ Case 294/83, [1986] ECR 1339, para. 23.
+fields:
+  case_name:
+    type: plain
+  report:
+    type: plain
+  locator:
+    type: plain
+segments:
+  - text: "{case_name}, "
+    requires: [case_name]
+  - text: "{report}"
+    requires: [report]
+  - text: ", {locator}"
+    requires: [locator]
+  - text: "."

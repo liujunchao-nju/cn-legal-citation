@@ -1,0 +1,61 @@
+type: it_book
+label: 意大利文图书
+description: 意大利文图书、文集文章、译作与百科词条。书名斜体，文集用 in 标示
+source: 《法学引注手册》(第二版)第 129 条；示例〔30〕
+examples:
+  - Angelo Falzea, L'offerta reale e la liberazione coattiva del debitore, Giuffre, 1947, p. 34 s.
+  - Francesco Antolisei, Manuale di diritto penale, 15 ed., Giuffre, 2008, p. 33.
+  - Natalino Irti (a cura di), La polemica sui concetti giuridici, Giuffre, 2004, p. 25 ss.
+  - C. Massimo Bianca, Diritto civile, Il, Il contratto, Giuffre, 2000, p. 551.
+  - Giuseppe Amadio, Risoluzione per inadempimento e autonomia privata, in Scritti in memoria di Rodolfo Sacco, I, UTET, 2024, p. 55.
+  - Teodoro Mommsen, Disegno del diritto pubblico romano, trad. it. di Pietro Bonfante, Istituto per gli studi di politica internazionale, 1973, p. 22.
+  - Riccardo Orestano, voce Azione in generale (storia del problema), in Enciclopedia del diritto, IN, Giuffre, 1959, p. 788.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " e "
+      sep_last: " e "
+  editor:
+    type: plain
+  title:
+    type: plain
+  volume:
+    type: plain
+  edition:
+    type: plain
+  translator:
+    type: plain
+  container:
+    type: plain
+  publisher:
+    type: plain
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}"
+    requires: [authors]
+  - text: " ({editor})"
+    requires: [editor]
+  - text: ", {title}"
+    requires: [title]
+  - text: ", {volume}"
+    requires: [volume]
+  - text: ", {edition}"
+    requires: [edition]
+  - text: ", {translator}"
+    requires: [translator]
+  - text: ", {container}"
+    requires: [container]
+  - text: ", {publisher}"
+    requires: [publisher]
+  - text: ", {year}"
+    requires: [year]
+  - text: ", {pages}"
+    requires: [pages]
+  - text: "."

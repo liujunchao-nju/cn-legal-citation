@@ -1,0 +1,49 @@
+type: conference
+label: 会议论文
+description: 未发表的会议论文；已发表的会议论文应引用发表版本
+source: 《法学引注手册》(第二版)第 63 条（注明会议名称、举办单位、时间、地点；年会时间地点可从略）；示例〔15〕
+examples:
+  - 习超:《证券监管有偏私吗?》,清华大学法学院、社会科学学院、数据科学研究院"迈向数据法学"研讨会会议论文,2017年12月23日于北京。
+  - 姜明安:《新时代中国行政法学的转型与使命》,中国法学会行政法学研究会2018年年会论文。
+  - 陈鹏:《基本权利保障中的法律保留:历史变迁与本土建构》,载《第五届中国宪法学青年论坛会议论文集》,2022年8月于苏州大学,第118页。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  title:
+    type: plain
+  meeting_info:
+    type: plain
+  published_in:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  place:
+    type: plain
+  pages:
+    type: page_range
+segments:
+  - text: "{authors}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}载《{published_in}》"
+    requires: [published_in]
+  - text: "{comma}{meeting_info}"
+    requires: [meeting_info]
+  - text: "{comma}{date}于{place}"
+    requires: [date, place]
+  - text: "{comma}{date}"
+    requires: [date]
+    absent: [place]
+  - text: "{comma}{pages}"
+    requires: [pages]
+  - text: "。"

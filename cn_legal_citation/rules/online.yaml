@@ -1,10 +1,12 @@
 type: online
 label: 网络文献
-description: 网站上发布的文章、报道。网站名称不使用书名号
-source: 《法学引注手册》(第二版)示例〔9〕〔10〕；《法律科学》编辑部 2021 年执行公告第 8 条
+description: 网站上发布的文章、报道。网站名称不使用书名号，上传日期优先于访问日期
+source: 《法学引注手册》(第二版)第 51-55 条（基本格式、上传日期、访问日期、链接）；示例〔12〕
 examples:
-  - 汪波:《哈尔滨市政法机关正对“宝马案”认真调查复查》,载人民网2004年1月10日,http://www.people.com.cn/GB/shehui/1062/2289764.html。
-  - 《被告人李宁、张磊贪污案一案开庭》,载新华网,http://www.xinhuanet.com/legal/2019-12/31/c_1125406056.htm。
+  - 梁秋坪、郝萍:《全国打击治理农村赌博工作现场会召开》,载人民网2024年10月12日,http://society.people.com.cn/n1/2024/1012/c1008-40337761.html。
+  - 任重远:《镇坪强制引产事件终结当事人获七万余元补助》,载财新网,http://china.caixin.com/2012-07-11/100409832.html。
+  - 《被告人李宁、张磊贪污案一审开庭》,载新华网2019年12月31日,http://www.xinhuanet.com/legal/2019-12/31/c_1125406056.htm。
+  - 黄晓磊:《再说博客文章被正式引用》,载科学网博客2012年3月23日,http://blog.sciencenet.cn/blog-111883-550928.html。
 fields:
   authors:
     type: author_list
@@ -25,6 +27,15 @@ fields:
     from: [year, month, day]
   url:
     type: plain
+  visit_year:
+    type: plain
+  visit_month:
+    type: plain
+  visit_day:
+    type: plain
+  visit_date:
+    type: date_cn
+    from: [visit_year, visit_month, visit_day]
 segments:
   - text: "{authors}{colon}"
     requires: [authors]
@@ -34,4 +45,6 @@ segments:
     requires: [site]
   - text: "{comma}{url}"
     requires: [url]
+  - text: "{comma}{visit_date}访问"
+    requires: [visit_date]
   - text: "。"

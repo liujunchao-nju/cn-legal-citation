@@ -1,0 +1,45 @@
+type: ru_article
+label: 俄文学术论文
+description: 俄文学术期刊与文集刊文章。论文题目斜体，题目与刊物名称之间用双斜线连接
+source: 《法学引注手册》(第二版)第 136-137 条
+examples:
+  - Вадим А. Виноградов, Анализ феномена "культура отмены" как инструмента регулирования общественных отношений // Журнал российского права, 2023, No 3, с. 17-30.
+  - Олег А. Кожевников и Анатолий Т. Карасев, Трансформация конституционных представлений // Вестник Южно-Уральского государственного университета, 2023, No 2, с. 67-73.
+  - 'Константин С. Кондратенко, Политическое управление в условиях цифровизации: основания и модели // Траектории политического развития России: институты, проекты, акторы, 2019, с. 26.'
+  - Анатолий В. Ананьев, Хакерская этика и этика научных исследований // Современное состояние и перспективы развития науки и образования, 2022 (2), с. 7-14.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " и др."
+      sep: ", "
+      sep_two: " и "
+      sep_last: " и "
+  title:
+    type: plain
+  journal:
+    type: plain
+  issue:
+    type: plain
+  ru_issue:
+    type: ru_issue
+    from: [issue]
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title} // "
+    requires: [title]
+  - text: "{journal}"
+    requires: [journal]
+  - text: ", {year}"
+    requires: [year]
+  - text: "{ru_issue}"
+    requires: [issue]
+  - text: ", {pages}"
+    requires: [pages]
+  - text: "."

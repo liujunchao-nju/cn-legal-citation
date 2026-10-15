@@ -1,0 +1,47 @@
+type: en_article
+label: 英文学术论文
+description: 英文学术期刊论文。两种卷次标注法：卷数与首页页码分列期刊名前后，或期刊名后写卷数页码
+source: 《法学引注手册》(第二版)第 100-101、103-105、107 条；示例〔24〕
+examples:
+  - Charles A. Reich, The New Property, 73 Yale Law Journal 733 (1964).
+  - Charles A. Reich, The New Property, 73 Yale Law Journal 733, 737-738 (1964).
+  - Cass R. Sunstein, Interpreting Statutes in the Regulatory State, 103 Harvard Law Review 405 (1989).
+  - Stephen J. Choi & A. C. Pritchard, Behavioral Economics and the SEC, Stanford Law Review, Vol. 56:1, p. 1-73 (2003).
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " & "
+      sep_last: " & "
+  title:
+    type: plain
+  journal:
+    type: plain
+  journal_ref:
+    type: journal_ref
+    from: [journal]
+  volume:
+    type: plain
+  first_page:
+    type: plain
+  pincite:
+    type: plain
+  volume_info:
+    type: plain
+  pages:
+    type: plain
+  year:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "{journal_ref}"
+    requires: [journal]
+  - text: " ({year})"
+    requires: [year]
+  - text: "."

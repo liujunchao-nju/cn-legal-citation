@@ -1,8 +1,11 @@
 """引注渲染。
 
-渲染过程分两步：
+渲染过程分三步：
 1. 按 rules/*.yaml 中声明的 fields，用规范化器把原始输入加工成片段；
-2. 按 segments 顺序拼接，只有 requires 字段全部非空时该段才参与拼接。
+2. 按 segments 顺序拼接，只有 requires 字段全部非空时该段才参与拼接；
+   同一 ``mutex`` 组内只取第一个条件成立的段（用于书名号与文章号等
+   互斥体例，如日文的『』与「」）；
+3. 折叠因字段缺失产生的重复标点。
 
 这样可选信息（译者、版次、页码、访问日期）缺失时不会留下悬空标点。
 """
@@ -36,19 +39,54 @@ def build_context(rule: dict, data: dict, punctuation: dict) -> dict:
 
 
 def tidy(text: str) -> str:
-    text = re.sub(r"[，,]\s*[。.]", "。", text)
-    text = re.sub(r"[：:]\s*[。.]", "。", text)
+    """折叠标点。
+
+    除中文全角标点的重复外，也处理外文加句点体例中出现的 ``s..``、``ff..``
+    （段落定位符本身以句点结尾时不再追加句点），以及空段产生的悬空标点。
+    """
+    text = re.sub(r"，\s*[。.]", "。", text)
+    text = re.sub(r"：\s*[。.]", "。", text)
     text = re.sub(r"，\s*，", "，", text)
+    text = re.sub(r"^[，,]\s*", "", text)
+    # 连续标点折叠：",," -> ","，".." -> "."，"。, " -> "。"，"。." -> "。"
+    text = re.sub(r"\.\.+", ".", text)
+    text = re.sub(r",\s*,+", ",", text)
+    text = re.sub(r"。\s*[。.]+", "。", text)
+    text = re.sub(r"。\s*,", "。", text)
+    text = re.sub(r"\s+([,.;])", r"\1", text)
+    text = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", text)
     text = re.sub(r"[ \t]{2,}", " ", text)
     return text.strip()
 
 
+def satisfied(segment: dict, ctx: dict) -> bool:
+    """段的成立条件：``requires`` 字段全部非空，``absent`` 字段全部为空。"""
+    for field in segment.get("requires") or []:
+        if not str(ctx.get(field, "")).strip():
+            return False
+    for field in segment.get("absent") or []:
+        if str(ctx.get(field, "")).strip():
+            return False
+    return True
+
+
 def render(rule: dict, data: dict, punctuation: dict) -> str:
     ctx = build_context(rule, data, punctuation)
+    segments = rule["segments"]
+
+    # 先确定每个 mutex 组内实际成立的段（同组只取第一个成立的）
+    group_selected: dict[str, int] = {}
+    for index, segment in enumerate(segments):
+        mutex = segment.get("mutex")
+        if mutex and mutex not in group_selected and satisfied(segment, ctx):
+            group_selected[mutex] = index
+
     parts = []
-    for segment in rule["segments"]:
-        requires = segment.get("requires") or []
-        if not all(str(ctx.get(field, "")).strip() for field in requires):
+    for index, segment in enumerate(segments):
+        mutex = segment.get("mutex")
+        if mutex and group_selected.get(mutex) != index:
+            continue
+        if not satisfied(segment, ctx):
             continue
         parts.append(segment["text"].format_map(_SafeDict(ctx)))
     return tidy("".join(parts))

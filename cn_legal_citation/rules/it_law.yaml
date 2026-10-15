@@ -1,0 +1,24 @@
+type: it_law
+label: 意大利法律
+description: 意大利法律规范。单行规范写类型、日期、编号；特定条文加 art. 与 comma
+source: 《法学引注手册》(第二版)第 131 条
+examples:
+  - D.P.R. 26 luglio 1976, n. 752.
+  - D.Lgs. 29 marzo 1993, n. 119.
+  - L. 13 febbraio 2001, n. 45.
+  - art. 3, comma 2, l. 31 maggio 1995, n. 218.
+fields:
+  law_type:
+    type: plain
+  date:
+    type: plain
+  number:
+    type: plain
+  article_ref:
+    type: plain
+segments:
+  - text: "art. {article_ref}, "
+    requires: [article_ref]
+  - text: "{law_type} {date}, n. {number}"
+    requires: [law_type, date, number]
+  - text: "."

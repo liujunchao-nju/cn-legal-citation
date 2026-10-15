@@ -1,0 +1,26 @@
+type: de_law
+label: 德国法律
+description: 德国法律。先写条款、后写法律名称；条文序数以 § 或 Art. 标注
+source: 《法学引注手册》(第二版)第 125 条
+examples:
+  - § 46b III Gesetz über die Entschädigung ehemaliger deutscher Kriegsgefangener (KgfEG) i.d.F. v. 04.02.1987.
+  - § 46b I KgfEG.
+  - Art. 2 II GG.
+  - § 58a I Nr. 2 StPO.
+  - § 12 HGB i.d.F. v. 28.08.1969.
+  - § 241 BGB a.F.
+fields:
+  section:
+    type: plain
+  law:
+    type: plain
+  date:
+    type: plain
+segments:
+  - text: "{section} "
+    requires: [section]
+  - text: "{law}"
+    requires: [law]
+  - text: " i.d.F. v. {date}"
+    requires: [date]
+  - text: "."

@@ -1,0 +1,31 @@
+type: hk_macau_law
+label: 港澳法律文件
+description: 中国香港、中国澳门特别行政区的法例、法令等法律文件，文件名称用简体中文
+source: 《法学引注手册》(第二版)第 81 条（香港法律文件）、第 82 条（澳门法律文件）
+examples:
+  - 《刑事上诉规则》(香港法例第221A章),第42(3)条。
+  - 《维护国家安全(中央人民政府驻香港特别行政区维护国家安全公署)规例》,2025年第77号法律公告。
+  - 《澳门特别行政区廉政公署组织法》(第17/2024号法律修改),第4条第8项,https://bo.io.gov.mo/bo/i/2024/35/lei17_en.asp。
+fields:
+  name:
+    type: plain
+  chapter:
+    type: plain
+  announcement:
+    type: plain
+  article:
+    type: plain
+  url:
+    type: plain
+segments:
+  - text: "《{name}》"
+    requires: [name]
+  - text: "({chapter})"
+    requires: [chapter]
+  - text: "{comma}{announcement}"
+    requires: [announcement]
+  - text: "{comma}{article}"
+    requires: [article]
+  - text: "{comma}{url}"
+    requires: [url]
+  - text: "。"

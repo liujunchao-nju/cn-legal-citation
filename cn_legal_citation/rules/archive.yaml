@@ -1,0 +1,33 @@
+type: archive
+label: 档案文献
+description: 档案文献，标明作者、文献名称、形成时间、保管机构、档案编号
+source: 《法学引注手册》(第二版)第 65 条
+examples:
+  - 雷经天:《关于边区司法工作检查情形》(1943年9月3日),陕西省档案馆陕甘宁边区高等法院档案,档案号15/149。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  title:
+    type: plain
+  date:
+    type: plain
+  repository:
+    type: plain
+  archive_note:
+    type: plain
+  archive_number:
+    type: plain
+segments:
+  - text: "{authors}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "({date})"
+    requires: [date]
+  - text: "{comma}{repository}{archive_note}"
+    requires: [repository]
+  - text: "{comma}档案号{archive_number}"
+    requires: [archive_number]
+  - text: "。"

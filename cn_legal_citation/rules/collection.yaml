@@ -1,10 +1,12 @@
 type: collection
-label: 论文集析出文献
-description: 收录于论文集、丛书中的单篇文献
-source: 《法学引注手册》(第二版)示例〔6〕〔7〕；《法律科学》编辑部 2021 年执行公告第 11 条
+label: 文集析出文献
+description: 收录于论文集、集刊、丛书中的单篇文献；文集有译者的标注在文集名之后
+source: 《法学引注手册》(第二版)第 42 条（文集的出版信息）、第 44 条（集刊的出版信息）；示例〔6〕〔7〕
 examples:
   - 王保树:《股份有限公司机关构造中的董事和董事会》,载梁慧星主编:《民商法论丛》第1卷,法律出版社1994年版,第110页。
   - "[德]莱纳·沃尔夫:《风险法的风险》,陈霄译,载刘刚编译:《风险规制:德国的理论与实践》,法律出版社2012年版。"
+  - 车照:《论国际条约对私人的效力》,载朱晓青、黄列主编:《国际条约与国内法的关系:中德国际条约与国内法关系研讨会论文集》,世界知识出版社2000年版。
+  - 伍跃:《传统中国行政诉讼的一个场景:民告官》,载[日]夫马进编:《中国诉讼社会史研究》,范愉、赵晶等译,浙江大学出版社2019年版。
 fields:
   authors:
     type: author_list
@@ -22,6 +24,8 @@ fields:
     type: authorship
   container_title:
     type: plain
+  container_translator:
+    type: translator
   volume:
     type: plain
   publisher:
@@ -39,6 +43,8 @@ segments:
     requires: [translator]
   - text: "{comma}载{editor}{editor_role}{colon}《{container_title}》"
     requires: [editor, container_title]
+  - text: "{comma}{container_translator}"
+    requires: [container_translator]
   - text: "第{volume}卷"
     requires: [volume]
   - text: "{comma}{publisher}"

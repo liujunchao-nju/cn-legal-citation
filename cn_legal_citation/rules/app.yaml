@@ -1,0 +1,32 @@
+type: app
+label: App 文章
+description: App 上发布的文章，标明 App 名称和上传日期
+source: 《法学引注手册》(第二版)第 56 条第 4 项
+examples:
+  - 莫纪宏:《论"中国式现代化"的法治保障》,载"学习强国"App2024年6月21日。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+  title:
+    type: plain
+  app:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+segments:
+  - text: "{authors}{colon}"
+    requires: [authors]
+  - text: "《{title}》"
+    requires: [title]
+  - text: "{comma}载“{app}”App{date}"
+    requires: [app]
+  - text: "。"

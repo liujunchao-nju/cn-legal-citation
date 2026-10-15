@@ -1,0 +1,18 @@
+type: resolution
+label: 会议决议
+description: 中国共产党全国代表大会、中央委员会或全国人大及其常委会的决议
+source: 《法学引注手册》(第二版)第 78 条（写明决议名称、决议作出时间和决议机关）
+examples:
+  - 《中共中央关于全面推进依法治国若干重大问题的决定》,2014年10月23日中国共产党第十八届中央委员会第四次全体会议通过。
+  - 《中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要》,2021年3月11日第十三届全国人民代表大会第四次会议批准。
+fields:
+  name:
+    type: titled
+  adoption:
+    type: plain
+segments:
+  - text: "{name}"
+    requires: [name]
+  - text: "{comma}{adoption}"
+    requires: [adoption]
+  - text: "。"

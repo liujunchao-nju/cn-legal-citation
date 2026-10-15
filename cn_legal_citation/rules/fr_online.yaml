@@ -1,0 +1,39 @@
+type: fr_online
+label: 法文网络文献
+description: 法文网络文献。作者、文献名之后标上传日期、网站名及网页链接；动态页面注访问日期
+source: 《法学引注手册》(第二版)第 121 条
+examples:
+  - 'Conseil d''État, Stationnement payant: le Conseil d''État précise le cadre juridique du recours à la géolocalisation des véhicules, 18 novembre 2024, https://www.conseil-etat.fr/actualites/stationnement-payant-le-conseil-d-etat-precise-le-cadre-juridique-du-recours-a-la-geolocalisation-des-vehicules.'
+  - Cécile Ducourtieux, Entre deuil et déni, le scandale des adoptions forcées en Angleterre, Le Monde, 18 juin 2022, modifié le 20 juin 2022, https://www.lemonde.fr/m-le-mag/article/2022/06/18/entre-deuil-et-deni-le-scandale-des-adoptions-forcees-en-angleterre-61309564500055.html.
+  - Cour de cassation, Comment faire un pourvoi en matière civile?, https://www.courdecassation.fr/mes-demarches/comment-faire-un-pourvoi-en-cassation/comment-faire-un-pourvoi-en-matiere-civile, Consulté le 16 décembre 2024.
+fields:
+  authors:
+    type: plain
+  title:
+    type: plain
+  site:
+    type: plain
+  date:
+    type: plain
+  modified:
+    type: plain
+  url:
+    type: plain
+  visit_date:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "{site}, "
+    requires: [site]
+  - text: "{date}"
+    requires: [date]
+  - text: ", modifié le {modified}"
+    requires: [modified]
+  - text: ", {url}"
+    requires: [url]
+  - text: ", Consulté le {visit_date}"
+    requires: [visit_date]
+  - text: "."

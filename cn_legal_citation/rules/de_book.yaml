@@ -1,0 +1,54 @@
+type: de_book
+label: 德文图书
+description: 德文专著、教科书、法律评注与汇编文章。评注用 in 引领，祝贺文集缩写为 FS
+source: 《法学引注手册》(第二版)第 123 条；示例〔29〕
+examples:
+  - Claus Roxin, Strafrecht Allgemeiner Teil, Band I, 4. Aufl., C.H.Beck, 2006, § 15 Rn. 19.
+  - 'Ralf Dreier/Stanley L. Paulson (Hrsg.), Gustav Radbruch, Rechtsphilosophie: Studienausgabe, 2. Aufl., C.F. Müller, 2003, S. 181.'
+  - Martin Schwab, in Münchener Kommentar BGB, Band 5, 6. Aufl., C.H.Beck, 2013, § 817 Rn. 9.
+  - Arthur Kaufmann, Bemerkungen zur Reform des § 218 StGB aus rechtsphilosophischer Sicht, in Jürgen Baumann (Hrsg.), Das Abtreibungsverbot des § 218 StGB, 2. Aufl., Luchterhand, 1972, S. 46 ff.
+  - Claus-Wilhelm Canaris, Gesamtunwirksamkeit und Teilgültigkeit rechtsgeschäftlicher Regelungen, FS für Steindorff, De Gruyter, 1990, S. 524.
+  - Jan-Hendrik Hoyer, in beck-online, GROSSKOMMENTAR BGB, C.H.Beck, 01.08.2024, § 256 Rn. 3.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " u.a."
+      sep: "/"
+  editor:
+    type: plain
+  title:
+    type: plain
+  container:
+    type: plain
+  band:
+    type: plain
+  edition:
+    type: plain
+  publisher:
+    type: plain
+  year:
+    type: plain
+  locator:
+    type: plain
+segments:
+  - text: "{authors}"
+    requires: [authors]
+  - text: " ({editor})"
+    requires: [editor]
+  - text: ", {title}"
+    requires: [title]
+  - text: ", {container}"
+    requires: [container]
+  - text: ", {band}"
+    requires: [band]
+  - text: ", {edition}"
+    requires: [edition]
+  - text: ", {publisher}"
+    requires: [publisher]
+  - text: ", {year}"
+    requires: [year]
+  - text: ", {locator}"
+    requires: [locator]
+  - text: "."

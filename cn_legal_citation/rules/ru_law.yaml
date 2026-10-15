@@ -1,0 +1,26 @@
+type: ru_law
+label: 俄罗斯法律
+description: 俄罗斯联邦法律。标明法律名称、条款编号、生效日期与引用来源
+source: 《法学引注手册》(第二版)第 139 条
+examples:
+  - Семейный кодекс Российской Федерации, ст. 16, принят 29 декабря 1995 года, Собрание законодательства Российской Федерации [СЗ РФ].
+  - Гражданский кодекс Российской Федерации, ст. 3301, принят 30 ноября 1994 года, СЗ РФ.
+fields:
+  name:
+    type: plain
+  article:
+    type: plain
+  date:
+    type: plain
+  source:
+    type: plain
+segments:
+  - text: "{name}"
+    requires: [name]
+  - text: ", ст. {article}"
+    requires: [article]
+  - text: ", принят {date}"
+    requires: [date]
+  - text: ", {source}"
+    requires: [source]
+  - text: "."

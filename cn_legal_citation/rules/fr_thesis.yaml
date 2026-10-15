@@ -1,0 +1,31 @@
+type: fr_thesis
+label: 法文学位论文
+description: 尚未出版的法文博士学位论文，写明作者、论文题目、学位授予单位与答辩年份
+source: 《法学引注手册》(第二版)第 118 条第 1 项
+examples:
+  - Daniel Gutmann, Le sentiment d'identité, étude du droit des personnes et de la famille, Thèse Paris II, 2000.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " et "
+      sep_last: " et "
+  title:
+    type: plain
+  school:
+    type: plain
+  year:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "Thèse {school}, "
+    requires: [school]
+  - text: "{year}"
+    requires: [year]
+  - text: "."

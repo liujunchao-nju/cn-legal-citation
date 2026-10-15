@@ -1,0 +1,45 @@
+type: fr_book
+label: 法文图书
+description: 法文图书。作者名全称名前姓后；书名斜体；编者用 dir. 标明
+source: 《法学引注手册》(第二版)第 116 条；示例〔28〕
+examples:
+  - Jacques Chevallier, L'État de droit, 4° éd., Montchrestien, 2003, p. 16-29.
+  - Bertrand Ancel et Yves Lequette, Les Grands Arrêts de la jurisprudence française de droit international privé, 5° éd., Dalloz, 2006, p. 197 s.
+  - Guy Raymond dir., Droit de la consommation, 3° éd., LexisNexis, 2015, p. 556.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " et "
+      sep_last: " et "
+  authorship:
+    type: authorship
+    options:
+      space: true
+  title:
+    type: plain
+  edition:
+    type: plain
+  publisher:
+    type: plain
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}{authorship}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "{edition}, "
+    requires: [edition]
+  - text: "{publisher}, "
+    requires: [publisher]
+  - text: "{year}, "
+    requires: [year]
+  - text: "{pages}"
+    requires: [pages]
+  - text: "."

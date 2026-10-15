@@ -1,0 +1,47 @@
+type: ru_book
+label: 俄文图书
+description: 俄文图书。书名斜体，再版版次用括号注明，编者用 ред. 标明
+source: 《法学引注手册》(第二版)第 135 条；示例〔31〕
+examples:
+  - Елена А. Дубовицкая, Европейское корпоративное право, Вольтерс Клувер России, 2008, с. 6.
+  - 'Альфред Э. Каринский, Введение в специальность "Юриспруденция": профессиональная деятельность юриста (2-е издание), Учебник Издательство Проспект, 2015, с. 101-103.'
+  - 'Иван И. Кравец ред., Государственное право и управление, СПб.: Юридический центр Пресс, 2005, с. 76.'
+  - 'Алексей А. Сидоров, Владимир В. Кузнецов и др., Уголовное право Российской Федерации, СПб.: Издательство СПбГУ, 2010, с. 456.'
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " и др."
+      keep_before_et_al: 2
+      sep: ", "
+      sep_two: " и "
+      sep_last: " и "
+  editor:
+    type: plain
+  title:
+    type: plain
+  edition:
+    type: plain
+  publisher:
+    type: plain
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}"
+    requires: [authors]
+  - text: " {editor}"
+    requires: [editor]
+  - text: ", {title}"
+    requires: [title]
+  - text: ", {edition}"
+    requires: [edition]
+  - text: ", {publisher}"
+    requires: [publisher]
+  - text: ", {year}"
+    requires: [year]
+  - text: ", {pages}"
+    requires: [pages]
+  - text: "."

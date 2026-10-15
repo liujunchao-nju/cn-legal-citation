@@ -1,0 +1,40 @@
+type: fr_article
+label: 法文论文
+description: 法文期刊论文与文集文章。论文题加引号，期刊名斜体，文集用 in 标示
+source: 《法学引注手册》(第二版)第 117 条
+examples:
+  - Frédéric Zenati, Pour une rénovation de la théorie de la propriété, RTD civ. 1993, p. 305 s.
+  - Guy Canivet, Le Conseil constitutionnel et le contrat, variations sur la "discretion", in Mélanges C. Larroumet, 2010, p. 75.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " et al."
+      sep: ", "
+      sep_two: " et "
+      sep_last: " et "
+  title:
+    type: plain
+  container:
+    type: plain
+  journal:
+    type: plain
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: "in {container}, "
+    requires: [container]
+  - text: "{journal} "
+    requires: [journal]
+  - text: "{year}, "
+    requires: [year]
+  - text: "{pages}"
+    requires: [pages]
+  - text: "."

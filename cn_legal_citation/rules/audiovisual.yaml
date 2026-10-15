@@ -1,0 +1,21 @@
+type: audiovisual
+label: 音像制品
+description: CD、DVD 等介质的音像制品，标明名称、制作单位和出版时间
+source: 《法学引注手册》(第二版)第 58 条。注：手册未给示例，名称的书名号与制作单位、出版时间之间的标点按条款文字推导，如有手册原文示例欢迎提 issue 校正
+examples:
+  - 《行政诉讼法讲义》,中国政法大学法学院制作,2010年。
+fields:
+  name:
+    type: plain
+  producer:
+    type: plain
+  year:
+    type: plain
+segments:
+  - text: "《{name}》"
+    requires: [name]
+  - text: "{comma}{producer}制作"
+    requires: [producer]
+  - text: "{comma}{year}年"
+    requires: [year]
+  - text: "。"

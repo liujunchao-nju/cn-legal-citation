@@ -1,0 +1,39 @@
+type: ja_article
+label: 日文期刊论文
+description: 日文期刊论文。论文名加単引号「」，期刊名称不加符号、不用简称
+source: 《法学引注手册》(第二版)第 144 条
+examples:
+  - 於保不二雄「付加物及び物抵当権」民商法29巻5号(1954年)1頁以下。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: "ほか"
+      sep: "="
+  title:
+    type: plain
+  journal:
+    type: plain
+  volume:
+    type: plain
+  issue:
+    type: plain
+  year:
+    type: plain
+  pages:
+    type: plain
+segments:
+  - text: "{authors}"
+    requires: [authors]
+  - text: "「{title}」"
+    requires: [title]
+  - text: "{journal}"
+    requires: [journal]
+  - text: "{volume}巻{issue}号"
+    requires: [volume, issue]
+  - text: "({year}年)"
+    requires: [year]
+  - text: "{pages}"
+    requires: [pages]
+  - text: "。"

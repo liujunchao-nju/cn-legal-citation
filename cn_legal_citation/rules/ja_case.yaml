@@ -1,0 +1,31 @@
+type: ja_case
+label: 日本法院案例
+description: 日本法院案例。案例名称用全称，用公元纪年；report 字段含判例集名称与卷辑号
+source: 《法学引注手册》(第二版)第 146 条
+examples:
+  - 大審院1919年3月3日判决,大審院民事判决録25輯356頁。
+  - 最高裁判所1982年7月15日判决,最高裁判所民事判例集36巻6号1113頁。
+fields:
+  court:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+  report:
+    type: plain
+  page:
+    type: plain
+segments:
+  - text: "{court}{date}判决"
+    requires: [court, date]
+  - text: ",{report}"
+    requires: [report]
+  - text: "{page}頁"
+    requires: [page]
+  - text: "。"

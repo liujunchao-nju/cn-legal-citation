@@ -1,0 +1,48 @@
+type: fr_case
+label: 法国法院案例
+description: 法国及欧洲法院案例。法院与审判庭名称用缩写，案号以 n° 标示
+source: 《法学引注手册》(第二版)第 120 条
+examples:
+  - CE, 15 février 2008, Commune de La Londe-les-Maures, req. n°279045.
+  - Cass. crim., 8 juillet 2015, n° 13-86.267.
+  - Cour d'appel d'Orléans, Chambre sociale, 23 avril 2015, n° 14/00500.
+  - CEDH, 8 décembre 2015, n° 60119/12, Z.H. et R.H. contre Suisse.
+  - CJUE, Grde Ch., 11 novembre 2014, Dano, Aff. C-333/13.
+  - CIJ, Delimitation maritime en mer Noire (Roumanie c. Ukraine), 3 février 2009, CIJ Recueil 2009, p. 61.
+fields:
+  court:
+    type: plain
+  chamber:
+    type: plain
+  date:
+    type: plain
+  case_name:
+    type: plain
+  number:
+    type: plain
+  report:
+    type: plain
+  page:
+    type: plain
+segments:
+  - text: "{court}"
+    requires: [court]
+  - text: ", {chamber}"
+    requires: [chamber]
+  - text: ", {date}"
+    requires: [date]
+    absent: [case_name_first]
+  - text: ", {case_name}"
+    requires: [case_name]
+    absent: [case_name_first]
+  - text: ", {case_name}"
+    requires: [case_name, case_name_first]
+  - text: ", {date}"
+    requires: [date, case_name_first]
+  - text: ", {number}"
+    requires: [number]
+  - text: ", {report}"
+    requires: [report]
+  - text: ", {page}"
+    requires: [page]
+  - text: "."

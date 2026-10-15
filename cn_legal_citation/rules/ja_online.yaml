@@ -1,0 +1,29 @@
+type: ja_online
+label: 日文网络文献
+description: 日文网络文献。学术著作极少使用，应优先引用正式出版的纸质版本
+source: 《法学引注手册》(第二版)第 148 条
+examples:
+  - 佐藤英明「一時所得の要件に関する覚書」 https://www.example.jp/paper,2024年6月1日。
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: "ほか"
+      sep: "="
+  title:
+    type: plain
+  url:
+    type: plain
+  date:
+    type: plain
+segments:
+  - text: "{authors}"
+    requires: [authors]
+  - text: "「{title}」"
+    requires: [title]
+  - text: " {url}"
+    requires: [url]
+  - text: ",{date}"
+    requires: [date]
+  - text: "。"

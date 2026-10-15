@@ -1,0 +1,22 @@
+type: en_case_uk
+label: 英文案例（英国）
+description: 英国法院案例。官方案例报告用[年份]标注，早期私人汇编用(年份)
+source: 《法学引注手册》(第二版)第 113 条
+examples:
+  - R v. Lord Chancellor, ex parte Witham [1998] QB 575, at 581E (per Laws J.).
+  - Lloyd v. Google LLC [2019] EWCA Civ 1599, para. 30.
+  - James Bagg's Case (1615) 11 Co. Rep. 93b, 77 Eng. Rep. 1271.
+  - Lloyd v. Google LLC [2019] EWCA Civ 1599, [2020] 2 WLR 484.
+fields:
+  case_name:
+    type: plain
+  report:
+    type: plain
+  locator:
+    type: plain
+segments:
+  - text: "{case_name} {report}"
+    requires: [case_name, report]
+  - text: ", {locator}"
+    requires: [locator]
+  - text: "."

@@ -1,0 +1,35 @@
+type: de_article
+label: 德文论文
+description: 德文学术期刊与报纸杂志文章。期刊名可写惯用缩写，出版日期按日月年顺序
+source: 《法学引注手册》(第二版)第 124 条
+examples:
+  - Benjamin Vogel, Rechtsgüterschutz und Normgeltung, ZStW 129 (2017), S. 630.
+  - Markus Wurdinger, Über Radarwarngeräte und die Zukunft des Europäischen Privatrechts, JuS 2012, S. 238 f.
+  - Thomas Fischer, Absurdes Spektakel um den Tod, in Die Zeit v. 29. 9. 2015.
+fields:
+  authors:
+    type: author_list
+    options:
+      max_before_et_al: 3
+      et_al: " u.a."
+      sep: "/"
+  title:
+    type: plain
+  journal:
+    type: plain
+  page:
+    type: plain
+  container:
+    type: plain
+segments:
+  - text: "{authors}, "
+    requires: [authors]
+  - text: "{title}, "
+    requires: [title]
+  - text: ", {container}"
+    requires: [container]
+  - text: ", {journal}"
+    requires: [journal]
+  - text: ", {page}"
+    requires: [page]
+  - text: "."

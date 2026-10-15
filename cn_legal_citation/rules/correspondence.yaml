@@ -1,0 +1,24 @@
+type: correspondence
+label: 私人通讯
+description: 私人通讯的引用，应征得对方同意并标明通讯方式和通讯时间
+source: 《法学引注手册》(第二版)第 61 条
+examples:
+  - 王名扬教授给笔者的电子邮件,2002年3月8日。
+fields:
+  description:
+    type: plain
+  year:
+    type: plain
+  month:
+    type: plain
+  day:
+    type: plain
+  date:
+    type: date_cn
+    from: [year, month, day]
+segments:
+  - text: "{description}"
+    requires: [description]
+  - text: "{comma}{date}"
+    requires: [date]
+  - text: "。"
